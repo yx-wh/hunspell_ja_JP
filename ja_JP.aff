@@ -178,7 +178,7 @@ MAP	(ゝ)(ヽ)
 MAP	(ゞ)(ヾ)
 MAP	(ゟ)(ヿ)
 
-REP 12
+REP 13
 REP かけ  掛け かけ
 REP かか  掛か かか
 REP かか  掛 かか
@@ -188,6 +188,7 @@ REP がか  掛 がか
 REP あが 上が あが
 REP あが 上 あが
 REP あげ 上げ あげ
+REP すぎ 過ぎ すぎ
 REP つ 付 つ
 REP づ 付 づ
 REP や 遣 や[らりるれろっ]
@@ -554,6 +555,8 @@ SFX	xe	い	かれ	[しじ]い
 #形容詞形派生
 SFX	SA	Y	1	
 SFX	SA	い	さ	い
+SFX	SG	Y	1	
+SFX	SG	い	すぎる/1KUy	い
 SFX	SO	Y	1
 SFX	SO	い	そう	.
 SFX	MI	Y	1	
@@ -566,6 +569,8 @@ SFX	GR	い	がる/5A5I5T5E5OBDUYUBub	い
 #形容動詞形派生
 SFX	sa	Y	1	
 SFX	sa	0	さ	.
+SFX	sg	Y	1	
+SFX	sg	0	すぎる/1KUy	.
 SFX	so	Y	1
 SFX	so	0	そう	.
 SFX	ge	Y	1	
