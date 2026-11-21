@@ -8,6 +8,38 @@ In addition to de-inflection, this Hunspell morphological dictionary now also su
 Updated: 2026/09/14
 
 
+## Old forms and traditional characters (ICONV)
+
+The `ICONV` table in `ja_JP.aff` rewrites the query **before** lookup and
+word-form analysis. Half-width katakana have always gone through it; old forms
+(and the traditional Chinese characters that coincide with them) do too:
+
+```text
+ICONV 圖 図
+```
+
+So `圖らず` is folded to `図らず` first, and the existing `5A`/`f2` rules
+deinflect it to `図る` — for every word containing the character, without a
+`st:` row per word.
+
+This comes with one maintenance rule: **the source spellings in `.dic` must
+match the `ICONV` table.** Once `圖` is rewritten to `図`, a row such as
+`圖/Zz st:図` can never be reached, and the loss is silent (`spell()` still
+returns true). Whenever the table changes, run:
+
+```bash
+python3 apply_iconv_to_dic.py ja_JP.aff ja_JP.dic --apply
+python3 ../mazegaki-dic/add_homonym_flag.py ja_JP.dic --aff ja_JP.aff --apply
+```
+
+It rewrites the heads and folds `st:` rows that have become self-referential;
+it is idempotent. Apply it with `--plain` to `ja_JP.part.txt` in mazegaki-dic
+as well, or the next rebuild will write the old forms back.
+
+Do not add reverse rows (`図 -> 圖`): they would double the variants of every
+query containing the character, and only proper nouns and old-spelling phrases
+would benefit.
+
 ## How to use
 ### GoldenDict-ng
 https://github.com/xiaoyifang/goldendict-ng/releases
